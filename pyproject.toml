@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "left-brain-right-brain"
+version = "0.1.0"
+description = ""
+authors = ["Enrique Matta-Rodriguez <enrique@matta.dev>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ollama = "^0.3.3"
+llama-stack = "^0.0.36"
+pymupdf = "^1.24.10"
+pymupdf4llm = "^0.0.17"
+llama-index = "^0.11.15"
+llama-index-llms-ollama = "^0.3.3"
+llama-index-embeddings-huggingface = "^0.3.1"
+llama-index-core = "^0.11.15"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.11.2"
+pytest = "^8.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
