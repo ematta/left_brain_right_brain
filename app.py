@@ -1,6 +1,5 @@
-# type: ignore
 import src.pdf as pdf
-import src.llama_index as llama
+import src.model as llama
 import argparse
 
 # Parse arguments and set the first argument as the path to the PDF file
@@ -14,12 +13,16 @@ args = parser.parse_args()
 
 pdf_path = args.pdf_path
 
-llama_docs = pdf.parse_pdf_to_llamaindex(pdf_path)
+llama_docs = pdf.parse_pdf_to_documents(pdf_path)
 
-index = llama.load_documents(llama_docs)
+index = llama.load_documents_huggingface(llama_docs)
 
-query_engine = index.as_query_engine()
+query_engine = index.as_query_engine(streaming=True)
 
-response = query_engine.query("Summarize the book in 5 sentences.")
-
-print(response)
+while True:
+    user_input = input("(YOU): ")
+    if user_input == 'exit':
+        break
+    response = query_engine.query(user_input)
+    response.print_response_stream()
+    print('')
