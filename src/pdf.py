@@ -1,6 +1,8 @@
+from typing import List
 import pymupdf4llm  # type: ignore
+from llama_index.core.schema import Document
 
-def pdf_documents(path):
+def pdf_documents(path: str) -> List[Document]:
     """
     Parse a PDF file into a list of documents that can be used with LlamaIndex.
 

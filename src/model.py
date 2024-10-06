@@ -1,14 +1,13 @@
 from llama_index.core import VectorStoreIndex
 
 
-def query_index(query: str, index: VectorStoreIndex, streaming: bool = False) -> str:
+def query_index(query: str, index: VectorStoreIndex) -> str:
     """
     Query a VectorStoreIndex using the HuggingFace embedding model.
 
     Args:
         query: The query to use for the query.
         index: The VectorStoreIndex to query.
-        streaming: Whether to stream the query results. Defaults to False.
 
     Returns:
         The query result.
