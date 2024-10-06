@@ -1,6 +1,6 @@
 import pymupdf4llm  # type: ignore
 
-def parse_pdf_to_documents(path):
+def pdf_documents(path):
     """
     Parse a PDF file into a list of documents that can be used with LlamaIndex.
 
