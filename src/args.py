@@ -1,15 +1,15 @@
 import argparse
 
 
-def parse__arg_for_pdf_path():
+def parse__args():
     """
-    Parse the --pdf-path argument from the command line.
+    Parse a command line argument for the path to a PDF file.
 
-    Returns:
-        The path to the PDF file to parse.
+    Returns an argparse.Namespace object with a single attribute, 'pdf_path',
+    which is the path to the PDF file.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--pdf-path', type=str, required=True)
+    parser.add_argument('--pdf-path', type=str, required=False)
+    parser.add_argument('--server', type=bool, required=False)
     args = parser.parse_args()
-    pdf_path = args.pdf_path
-    return pdf_path
+    return args
