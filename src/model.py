@@ -61,3 +61,19 @@ def load_documents_ollama(documents) -> VectorStoreIndex:
     Settings.llm = Ollama(model=MODEL_NAME, request_timeout=360.0)
     return VectorStoreIndex.from_documents(documents)
 
+
+def query_documents(query: str, index: VectorStoreIndex, streaming: bool = False) -> str:
+    """
+    Query a VectorStoreIndex using the HuggingFace embedding model.
+
+    Args:
+        query: The query to use for the query.
+        index: The VectorStoreIndex to query.
+        streaming: Whether to stream the query results. Defaults to False.
+
+    Returns:
+        The query result.
+    """
+    query_engine = index.as_query_engine(streaming=streaming)
+    response = query_engine.query(query)
+    return response
