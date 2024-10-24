@@ -1,14 +1,14 @@
 from typing import List
-import chromadb
+import chromadb # type: ignore
 
-from llama_index.core import StorageContext, VectorStoreIndex, Settings
-from llama_index.core.base.embeddings.base import BaseEmbedding
-from llama_index.vector_stores.chroma import ChromaVectorStore
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.ollama import Ollama
-from llama_index.core.schema import Document
+from llama_index.core import StorageContext, VectorStoreIndex, Settings # type: ignore
+from llama_index.core.base.embeddings.base import BaseEmbedding # type: ignore
+from llama_index.vector_stores.chroma import ChromaVectorStore # type: ignore
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding # type: ignore
+from llama_index.llms.ollama import Ollama # type: ignore
+from llama_index.core.schema import Document # type: ignore
 
-MODEL_NAME = "llama3.2"
+MODEL_NAME = "qwen2.5"
 BASE_URL = "http://localhost:11434"
 
 Settings.embed_model = HuggingFaceEmbedding(
@@ -33,7 +33,7 @@ def add_documents_and_retrieve_index(
     Returns:
         The VectorStoreIndex created from the documents.
     """
-    collection = chroma_client.get_or_create_collection(name=name)
+    collection = chroma_client.get_or_create_collection(name=name, )
     vector_store = ChromaVectorStore(chroma_collection=collection)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
     index = VectorStoreIndex.from_documents(

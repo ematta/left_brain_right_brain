@@ -1,7 +1,8 @@
-# Create a flask app
-from flask import Flask, request
+from flask import Flask, request # type: ignore
+from src.database import add_documents_and_retrieve_index, load_documents as db_load_documents
+from src.pdf import load_documents as pdf_load_documents
 import src.model as model
-import src.args as args
+
 
 app = Flask(__name__)
 
@@ -19,9 +20,9 @@ def query():
     """
     data = request.get_json()
     query = data["query"]
-    index = model.create_index(model.load_documents_huggingface)
-    response = index.query(query)
-    return response
+    index = db_load_documents()
+    resp = model.query_index(index=index, query=query)
+    return resp
 
 
 @app.route("/document", methods=["POST"])
@@ -37,4 +38,6 @@ def document():
     """
     data = request.get_json()
     document = data["document"]
-    return document
+    tokenized = pdf_load_documents(document)
+    add_documents_and_retrieve_index(tokenized, model.load_documents_huggingface)
+    return { "status": "ok" }
