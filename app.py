@@ -4,14 +4,15 @@ import src.model as model
 import src.args as args
 import src.server as server
 
-args = args.parse_args()
+parsed = args.parse_args()
 
-if args.server:
+if parsed.server:
     server.app.run()
 else:
-    pdf_path = args.pdf_path
-    if args.new:
-        index = database.add_and_retrieve_document(documents=pdf.pdf_documents(pdf_path))
+    pdf_path = parsed.pdf_path
+    if parsed.new:
+        doc_pdf = pdf.load_documents(pdf_path)
+        index = database.add_documents_and_retrieve_index(documents=doc_pdf)
     else:
         index = database.load_documents()
 
@@ -21,4 +22,3 @@ else:
             break
         response = model.query_index(user_input, index)
         print(f'LLM: {response}')
-

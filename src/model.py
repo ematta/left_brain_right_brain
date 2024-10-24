@@ -1,4 +1,4 @@
-from llama_index.core import VectorStoreIndex
+from llama_index.core import VectorStoreIndex # type: ignore
 
 
 def query_index(query: str, index: VectorStoreIndex) -> str:
@@ -16,4 +16,4 @@ def query_index(query: str, index: VectorStoreIndex) -> str:
         response_mode="tree_summarize",
         verbose=True)
     response = query_engine.query(query)
-    return response
+    return response.response
